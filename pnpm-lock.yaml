@@ -29,6 +29,9 @@ dependencies:
   regenerator-runtime:
     specifier: ^0.13.7
     version: 0.13.11
+  uuid:
+    specifier: ^9.0.1
+    version: 9.0.1
 
 devDependencies:
   '@babel/core':
@@ -37,9 +40,9 @@ devDependencies:
   '@babel/preset-typescript':
     specifier: ^7.13.0
     version: 7.23.0(@babel/core@7.23.0)
-  '@types/office-js':
-    specifier: ^1.0.256
-    version: 1.0.346
+  '@types/office-js-preview':
+    specifier: ^1.0.416
+    version: 1.0.416
   '@types/office-runtime':
     specifier: ^1.0.23
     version: 1.0.33
@@ -49,15 +52,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^17.0.11
     version: 17.0.21
-  '@types/react-hot-loader':
-    specifier: ^4.1.1
-    version: 4.1.1(@types/react@17.0.66)(react-dom@17.0.2)(react@17.0.2)
   '@types/webpack':
     specifier: ^4.4.34
     version: 4.41.34
-  '@types/webpack-dev-server':
-    specifier: ^4.1.0
-    version: 4.7.2(webpack-cli@5.1.4)(webpack@5.88.2)
   acorn:
     specifier: ^8.5.0
     version: 8.10.0
@@ -1681,8 +1678,8 @@ packages:
     resolution: {integrity: sha512-RcdC3hOBOauLP+r/kRt27NrByYtDjsXyAuSbR87O6xpsvi763WI+5fbSIvYJrXnt9w4RuxhV6eAXfIs7aaf/FQ==}
     dev: true
 
-  /@types/office-js@1.0.346:
-    resolution: {integrity: sha512-iiC2efWU1hrQcfVQT53WovAmT4MMBgpqwd2y6oBy9qc9kmlbT00NNj41F6myXvhC0Jmm5x812HQW/vmSDvImug==}
+  /@types/office-js-preview@1.0.416:
+    resolution: {integrity: sha512-XRWs12a1FOWzBWgr/yo5gdotX4bRRvy6wG4LOPV9532MDhsrtHVqt7ev9FufhudGCfqkx4b56pG20NOFflSlkQ==}
     dev: true
 
   /@types/office-runtime@1.0.33:
@@ -1710,17 +1707,6 @@ packages:
     resolution: {integrity: sha512-3rQEFUNUUz2MYiRwJJj6UekcW7rFLOtmK7ajQP7qJpjNdggInl3I/xM4I3Hq1yYPdCGVMgax1gZsB7BBTtayXg==}
     dependencies:
       '@types/react': 17.0.66
-
-  /@types/react-hot-loader@4.1.1(@types/react@17.0.66)(react-dom@17.0.2)(react@17.0.2):
-    resolution: {integrity: sha512-vsP4f1wz+rw13dEF0/W55O/gQT12xcjsf7EVWyttTtKNG7S3U767aSAAJP0PVV/792kq3dv8CkbIcLjzxcSBhQ==}
-    deprecated: This is a stub types definition. react-hot-loader provides its own type definitions, so you do not need this installed.
-    dependencies:
-      react-hot-loader: 4.13.1(@types/react@17.0.66)(react-dom@17.0.2)(react@17.0.2)
-    transitivePeerDependencies:
-      - '@types/react'
-      - react
-      - react-dom
-    dev: true
 
   /@types/react@17.0.66:
     resolution: {integrity: sha512-azQzO1tuioq9M4vVKzzdBgG5KfLhyocYkRlJMBDcrJ7bUzyjR7QIGbZk2zH7sB5KpXRWoZJQ3CznVyhDS/swxA==}
@@ -1795,20 +1781,6 @@ packages:
     resolution: {integrity: sha512-9SjrHO54LINgC/6Ehr81NjAxAYvwEZqjUHLjJYvC4Nmr9jbLQCIZbWSvl4vXQkkmR1UAuaKDycau3O1kWGFyXQ==}
     dependencies:
       source-map: 0.6.1
-    dev: true
-
-  /@types/webpack-dev-server@4.7.2(webpack-cli@5.1.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-Y3p0Fmfvp0MHBDoCzo+xFJaWTw0/z37mWIo6P15j+OtmUDLvznJWdZNeD7Q004R+MpQlys12oXbXsrXRmxwg4Q==}
-    deprecated: This is a stub types definition. webpack-dev-server provides its own type definitions, so you do not need this installed.
-    dependencies:
-      webpack-dev-server: 4.13.1(webpack-cli@5.1.4)(webpack@5.88.2)
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - supports-color
-      - utf-8-validate
-      - webpack
-      - webpack-cli
     dev: true
 
   /@types/webpack-sources@3.2.1:
@@ -3377,6 +3349,7 @@ packages:
 
   /dom-walk@0.1.2:
     resolution: {integrity: sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==}
+    dev: false
 
   /domelementtype@2.3.0:
     resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
@@ -4408,6 +4381,7 @@ packages:
     dependencies:
       min-document: 2.19.0
       process: 0.11.10
+    dev: false
 
   /globals@11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
@@ -4550,6 +4524,7 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: false
 
   /hosted-git-info@4.1.0:
     resolution: {integrity: sha512-kyCuEOWjJqZuDbRHzL8V93NzQhwIB71oFWSyzVo+KPZI+pnQPPxucdkrOZvkLRnrf5URsQM+IJ09Dw29cRALIA==}
@@ -5704,6 +5679,7 @@ packages:
     resolution: {integrity: sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==}
     dependencies:
       dom-walk: 0.1.2
+    dev: false
 
   /minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
@@ -6767,6 +6743,7 @@ packages:
       object-assign: 4.1.1
       react: 17.0.2
       scheduler: 0.20.2
+    dev: false
 
   /react-hot-loader@4.13.1(@types/react@17.0.66)(react-dom@17.0.2)(react@17.0.2):
     resolution: {integrity: sha512-ZlqCfVRqDJmMXTulUGic4lN7Ic1SXgHAFw7y/Jb7t25GBgTR0fYAJ8uY4mrpxjRyWGWmqw77qJQGnYbzCvBU7g==}
@@ -6790,12 +6767,14 @@ packages:
       react-lifecycles-compat: 3.0.4
       shallowequal: 1.1.0
       source-map: 0.7.4
+    dev: false
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
   /react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
+    dev: false
 
   /react@17.0.2:
     resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
@@ -6803,6 +6782,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
 
   /read-cmd-shim@3.0.1:
     resolution: {integrity: sha512-kEmDUoYf/CDy8yZbLTmhB1X9kkjf9Q80PCNsDMb7ufrGd6zZSQA1+UyjrO+pZm5K/S4OXCWJeiIt1JA8kAsa6g==}
@@ -7089,6 +7069,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
 
   /schema-utils@2.7.1:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
@@ -7235,6 +7216,7 @@ packages:
 
   /shallowequal@1.1.0:
     resolution: {integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==}
+    dev: false
 
   /shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -7969,6 +7951,11 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
     dev: true
+
+  /uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache@2.4.0:
     resolution: {integrity: sha512-ocyWc3bAHBB/guyqJQVI5o4BZkPhznPYUG2ea80Gond/BgNWpap8TOmLSeeQG7bnh2KMISxskdADG59j7zruhw==}
