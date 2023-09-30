@@ -1,19 +1,14 @@
 import * as React from "react";
 import { DefaultButton } from "@fluentui/react";
-import Header from "./Header";
-import HeroList, { HeroListItem } from "./HeroList";
-import Progress from "./Progress";
 
-/* global Word, require */
+/* global Word */
 
 export interface AppProps {
   title: string;
   isOfficeInitialized: boolean;
 }
 
-export interface AppState {
-  listItems: HeroListItem[];
-}
+export interface AppState {}
 
 export default class App extends React.Component<AppProps, AppState> {
   constructor(props, context) {
@@ -42,47 +37,40 @@ export default class App extends React.Component<AppProps, AppState> {
     });
   }
 
-  click = async () => {
-    return Word.run(async (context) => {
-      /**
-       * Insert your Word code here
-       */
-
-      // insert a paragraph at the end of the document.
-      const paragraph = context.document.body.insertParagraph("Hello World", Word.InsertLocation.end);
-
-      // change the paragraph color to blue.
-      paragraph.font.color = "blue";
-
-      await context.sync();
-    });
-  };
-
   render() {
-    const { title, isOfficeInitialized } = this.props;
+    const { isOfficeInitialized } = this.props;
 
     if (!isOfficeInitialized) {
-      return (
-        <Progress
-          title={title}
-          logo={require("./../../../assets/logo-filled.png")}
-          message="Please sideload your addin to see app body."
-        />
-      );
+      return <div>Please sideload your addin to see app body.</div>;
     }
 
     return (
       <div className="ms-welcome">
-        <Header logo={require("./../../../assets/logo-filled.png")} title={this.props.title} message="Welcome" />
-        <HeroList message="Discover what Office Add-ins can do for you today!" items={this.state.listItems}>
-          <p className="ms-font-l">
-            Modify the source files, then click <b>Run</b>.
-          </p>
-          <DefaultButton className="ms-welcome__action" iconProps={{ iconName: "ChevronRight" }} onClick={this.click}>
-            Run
-          </DefaultButton>
-        </HeroList>
+        <DefaultButton
+          className="ms-Button"
+          id="create-content-control"
+          iconProps={{ iconName: "ChevronRight" }}
+          onClick={createContentControl}
+        >
+          Create Content Control
+        </DefaultButton>
       </div>
     );
   }
+}
+
+async function createContentControl() {
+  await Word.run(async (context) => {
+    const serviceNameRange = context.document.getSelection();
+    const serviceNameContentControl = serviceNameRange.insertContentControl();
+
+    serviceNameContentControl.title = "Service Name";
+    serviceNameContentControl.tag = "serviceName";
+    serviceNameContentControl.appearance = "BoundingBox";
+    serviceNameContentControl.color = "blue";
+
+    serviceNameContentControl.insertText("Fabrikam Online Productivity Suite", Word.InsertLocation.replace);
+
+    await context.sync();
+  });
 }
