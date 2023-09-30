@@ -5,7 +5,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
   <Id>3c2142c4-8579-45b4-b86b-3be939b14a5f</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Matthieu Dartiguenave</ProviderName>
+  <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="hello-word" />
   <Description DefaultValue="A template to get started." />
