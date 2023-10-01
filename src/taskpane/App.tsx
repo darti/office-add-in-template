@@ -1,6 +1,11 @@
 import * as React from "react";
-import { DefaultButton } from "@fluentui/react";
+
+import { Button } from "@fluentui/react-components";
 import { generateTemplate, importDocument } from "./template";
+
+import { bundleIcon, CalendarMonthFilled, CalendarMonthRegular } from "@fluentui/react-icons";
+
+const CalendarMonth = bundleIcon(CalendarMonthFilled, CalendarMonthRegular);
 
 /* global Word */
 
@@ -54,32 +59,22 @@ export default class App extends React.Component<AppProps, AppState> {
         <h2 className="ms-font-xl ms-fontWeight-semilight ms-fontColor-neutralPrimary ms-u-slideUpIn20">Hero Word !</h2>
 
         <main className="ms-welcome__main">
-          <DefaultButton
+          <Button
             className="ms-Button"
             id="create-content-control"
-            iconProps={{ iconName: "ChevronRight" }}
+            icon={<CalendarMonth />}
             onClick={createContentControl}
           >
             Create Content Control
-          </DefaultButton>
+          </Button>
 
-          <DefaultButton
-            className="ms-Button"
-            id="create-content-control"
-            iconProps={{ iconName: "ChevronRight" }}
-            onClick={generateTemplate}
-          >
+          <Button className="ms-Button" id="create-content-control" icon={<CalendarMonth />} onClick={generateTemplate}>
             Generate template
-          </DefaultButton>
+          </Button>
 
-          <DefaultButton
-            className="ms-Button"
-            id="create-content-control"
-            iconProps={{ iconName: "ChevronRight" }}
-            onClick={importDocument}
-          >
+          <Button className="ms-Button" id="create-content-control" icon={<CalendarMonth />} onClick={importDocument}>
             Import document
-          </DefaultButton>
+          </Button>
         </main>
       </div>
     );

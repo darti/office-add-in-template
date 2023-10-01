@@ -26,8 +26,8 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@fluentui/font-icons-mdl2": "^8.5.25",
-    "@fluentui/react": "^8.111.4",
+    "@fluentui/react-components": "^9.32.3",
+    "@fluentui/react-icons": "^2.0.218",
     "core-js": "^3.32.2",
     "cross-fetch": "^4.0.0",
     "es6-promise": "^4.2.8",

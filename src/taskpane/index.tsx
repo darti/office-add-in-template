@@ -1,23 +1,15 @@
 import App from "./App";
-import { initializeIcons } from "@fluentui/font-icons-mdl2";
-import { ThemeProvider } from "@fluentui/react";
+import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
+
 import { createRoot } from "react-dom/client";
 
 import React from "react";
 
 /* global document, Office */
 
-initializeIcons();
-
 let isOfficeInitialized = false;
 
 const title = "Hero Word";
-
-// root.render(
-//   <ThemeProvider>
-//     <App title={title} isOfficeInitialized={isOfficeInitialized} />
-//   </ThemeProvider>,
-// );
 
 /* Render application after Office initializes */
 Office.onReady(() => {
@@ -27,8 +19,8 @@ Office.onReady(() => {
   const root = createRoot(container);
 
   root.render(
-    <ThemeProvider>
+    <FluentProvider theme={teamsLightTheme}>
       <App title={title} isOfficeInitialized={isOfficeInitialized} />
-    </ThemeProvider>,
+    </FluentProvider>,
   );
 });
