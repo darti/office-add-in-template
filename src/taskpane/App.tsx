@@ -60,7 +60,7 @@ export default class App extends React.Component<AppProps, AppState> {
 
         <main className="ms-welcome__main">
           <Button
-            className="ms-Button"
+            className="ms-Button drop-shadow-2xl"
             id="create-content-control"
             icon={<CalendarMonth />}
             onClick={createContentControl}

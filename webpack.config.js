@@ -5,11 +5,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
+const path = require("path");
 
 const urlDev = "https://localhost:3000/";
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
-
-const isDevelopment = process.env.NODE_ENV !== "production";
 
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
@@ -60,6 +59,11 @@ module.exports = async (env, options) => {
           generator: {
             filename: "assets/[name][ext][query]",
           },
+        },
+        {
+          test: /\.css$/i,
+          include: path.resolve(__dirname, "src"),
+          use: ["style-loader", "css-loader", "postcss-loader"],
         },
       ],
     },

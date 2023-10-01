@@ -1,3 +1,4 @@
+/* global document, Office */
 import App from "./App";
 import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
 
@@ -5,7 +6,7 @@ import { createRoot } from "react-dom/client";
 
 import React from "react";
 
-/* global document, Office */
+import "./taskpane.css";
 
 let isOfficeInitialized = false;
 
