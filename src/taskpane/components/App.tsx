@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DefaultButton } from "@fluentui/react";
-import { generateTemplate } from "../template";
+import { generateTemplate, importDocument } from "../template";
 
 /* global Word */
 
@@ -70,6 +70,15 @@ export default class App extends React.Component<AppProps, AppState> {
             onClick={generateTemplate}
           >
             Generate template
+          </DefaultButton>
+
+          <DefaultButton
+            className="ms-Button"
+            id="create-content-control"
+            iconProps={{ iconName: "ChevronRight" }}
+            onClick={importDocument}
+          >
+            Import document
           </DefaultButton>
         </main>
       </div>
