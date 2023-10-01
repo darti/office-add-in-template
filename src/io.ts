@@ -1,4 +1,5 @@
 import { fetch } from "cross-fetch";
+import { Gitlab } from "@gitbeaker/rest";
 
 export async function fetchTemplate(
   base: string,
@@ -29,4 +30,11 @@ export async function fetchTemplate(
   reader.readAsDataURL(blob);
 
   return await result;
+}
+
+export async function listLibraries(base: string, projectId: string, accessToken: string) {
+  const api = new Gitlab({
+    host: base,
+    token: accessToken,
+  });
 }
