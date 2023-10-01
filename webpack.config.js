@@ -9,6 +9,8 @@ const Dotenv = require("dotenv-webpack");
 const urlDev = "https://localhost:3000/";
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
 
+const isDevelopment = process.env.NODE_ENV !== "production";
+
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
   return { ca: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
@@ -21,7 +23,7 @@ module.exports = async (env, options) => {
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
       vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
-      taskpane: ["react-hot-loader/patch", "./src/taskpane/index.tsx", "./src/taskpane/taskpane.html"],
+      taskpane: ["./src/taskpane/index.tsx", "./src/taskpane/taskpane.html"],
       commands: "./src/commands/commands.ts",
     },
     output: {
@@ -45,7 +47,7 @@ module.exports = async (env, options) => {
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
-          use: ["react-hot-loader/webpack", "ts-loader"],
+          use: ["ts-loader"],
         },
         {
           test: /\.html$/,

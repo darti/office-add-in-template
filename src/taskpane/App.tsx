@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DefaultButton } from "@fluentui/react";
-import { generateTemplate, importDocument } from "../template";
+import { generateTemplate, importDocument } from "./template";
 
 /* global Word */
 
