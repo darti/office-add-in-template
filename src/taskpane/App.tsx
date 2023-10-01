@@ -10,75 +10,48 @@ const CalendarMonth = bundleIcon(CalendarMonthFilled, CalendarMonthRegular);
 /* global Word */
 
 export interface AppProps {
-  title: string;
   isOfficeInitialized: boolean;
 }
 
-export interface AppState {}
-
-export default class App extends React.Component<AppProps, AppState> {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      listItems: [],
-    };
+export default function App({ isOfficeInitialized }: AppProps) {
+  if (!isOfficeInitialized) {
+    return <div>Please sideload your addin to see app body.</div>;
   }
 
-  componentDidMount() {
-    this.setState({
-      listItems: [
-        {
-          icon: "Ribbon",
-          primaryText: "Achieve more with Office integration",
-        },
-        {
-          icon: "Unlock",
-          primaryText: "Unlock features and functionality",
-        },
-        {
-          icon: "Design",
-          primaryText: "Create and visualize like a pro",
-        },
-      ],
-    });
-  }
+  return (
+    <div className="ms-welcome">
+      <section className="ms-welcome__header ms-bgColor-neutralLighter ms-u-fadeIn500">
+        <h1 className="ms-fontSize-su ms-fontWeight-light ms-fontColor-neutralPrimary">Hero Word !</h1>
+      </section>
 
-  render() {
-    const { isOfficeInitialized } = this.props;
+      <h2 className="ms-font-xl ms-fontWeight-semilight ms-fontColor-neutralPrimary ms-u-slideUpIn20">Hero Word !</h2>
 
-    if (!isOfficeInitialized) {
-      return <div>Please sideload your addin to see app body.</div>;
-    }
+      <main className="ms-welcome__main">
+        <Button
+          className="ms-Button drop-shadow-2xl"
+          id="create-content-control"
+          icon={<CalendarMonth />}
+          onClick={createContentControl}
+        >
+          Create Content Control
+        </Button>
 
-    return (
-      <div className="ms-welcome">
-        <section className="ms-welcome__header ms-bgColor-neutralLighter ms-u-fadeIn500">
-          <h1 className="ms-fontSize-su ms-fontWeight-light ms-fontColor-neutralPrimary">Hero Word !</h1>
-        </section>
+        <Button
+          className="ms-Button"
+          appearance="primary"
+          id="create-content-control"
+          icon={<CalendarMonth />}
+          onClick={generateTemplate}
+        >
+          Generate template
+        </Button>
 
-        <h2 className="ms-font-xl ms-fontWeight-semilight ms-fontColor-neutralPrimary ms-u-slideUpIn20">Hero Word !</h2>
-
-        <main className="ms-welcome__main">
-          <Button
-            className="ms-Button drop-shadow-2xl"
-            id="create-content-control"
-            icon={<CalendarMonth />}
-            onClick={createContentControl}
-          >
-            Create Content Control
-          </Button>
-
-          <Button className="ms-Button" id="create-content-control" icon={<CalendarMonth />} onClick={generateTemplate}>
-            Generate template
-          </Button>
-
-          <Button className="ms-Button" id="create-content-control" icon={<CalendarMonth />} onClick={importDocument}>
-            Import document
-          </Button>
-        </main>
-      </div>
-    );
-  }
+        <Button className="ms-Button" id="create-content-control" icon={<CalendarMonth />} onClick={importDocument}>
+          Import document
+        </Button>
+      </main>
+    </div>
+  );
 }
 
 async function createContentControl() {

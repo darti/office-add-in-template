@@ -1,6 +1,6 @@
 /* global document, Office */
 import App from "./App";
-import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
+import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
 import { createRoot } from "react-dom/client";
 
@@ -10,8 +10,6 @@ import "./taskpane.css";
 
 let isOfficeInitialized = false;
 
-const title = "Hero Word";
-
 /* Render application after Office initializes */
 Office.onReady(() => {
   isOfficeInitialized = true;
@@ -20,8 +18,8 @@ Office.onReady(() => {
   const root = createRoot(container);
 
   root.render(
-    <FluentProvider theme={teamsLightTheme}>
-      <App title={title} isOfficeInitialized={isOfficeInitialized} />
+    <FluentProvider theme={webLightTheme}>
+      <App isOfficeInitialized={isOfficeInitialized} />
     </FluentProvider>,
   );
 });
