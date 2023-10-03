@@ -1,6 +1,7 @@
 import React from "react";
 
 import Libs from "./components/Libs";
+import Elements from "./components/Elements";
 
 export interface AppProps {
   isOfficeInitialized: boolean;
@@ -19,6 +20,7 @@ export default function App({ isOfficeInitialized }: AppProps) {
 
       <main className="ms-welcome__main">
         <Libs />
+        <Elements />
       </main>
     </div>
   );
