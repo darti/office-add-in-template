@@ -3,6 +3,7 @@
   "plugins": ["@typescript-eslint", "react"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended", "prettier"],
   "rules": {
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "react/react-in-jsx-scope": "off"
   }
 }

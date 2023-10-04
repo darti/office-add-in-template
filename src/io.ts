@@ -16,11 +16,16 @@ export async function fetchTemplate(
   const result = new Promise<string>((resolve, reject) => {
     reader.onload = () => {
       // Remove the metadata before the Base64-encoded string.
-      const s = reader.result.toString();
-      const startIndex = s.indexOf("base64,");
-      const externalDocument = s.substring(startIndex + 7);
+      const s = reader?.result?.toString();
 
-      resolve(externalDocument);
+      if (s) {
+        const startIndex = s.indexOf("base64,");
+        const externalDocument = s.substring(startIndex + 7);
+
+        resolve(externalDocument);
+      } else {
+        reject("No result");
+      }
     };
 
     reader.onerror = reject;
@@ -41,7 +46,7 @@ export async function listLibraries(base: string, projectId: string, accessToken
   console.error("Narf");
 
   return files /*.filter((f) => f.name.endsWith(".docx")).*/
-    .map((f) => f.path);
+    .map((f: { path: string }) => f.path);
 
   return files;
 }

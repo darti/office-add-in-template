@@ -28,7 +28,7 @@ export async function initLib() {
     {
       const desc = body.insertParagraph("Description", Word.InsertLocation.end);
       desc.styleBuiltIn = Word.BuiltInStyleName.normal;
-      desc.font.highlightColor = null;
+      desc.font.highlightColor = "";
       desc.font.italic = true;
       const cc = desc.insertContentControl();
       cc.title = "Library Description";

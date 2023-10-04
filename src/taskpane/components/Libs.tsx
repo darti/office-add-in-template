@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Body1, Button, Caption1, Card, CardFooter, CardHeader } from "@fluentui/react-components";
 import { NewRegular, AddSquareRegular } from "@fluentui/react-icons";
 import { addElement, initLib } from "../../libs";
