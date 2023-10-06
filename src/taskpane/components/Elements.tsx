@@ -28,29 +28,20 @@ export default function Elements() {
 
   const loadLibs = async () => {
     await Word.run(async (context) => {
-      if (
-        process.env.TEMPLATLES_LIB_BASE_URL &&
-        process.env.TEMPLATES_LIB_PROJECT_ID &&
-        process.env.TEMPLATES_LIB_ACCESS_TOKEN
-      ) {
-        const paths = await listLibraries(
-          process.env.TEMPLATLES_LIB_BASE_URL,
-          process.env.TEMPLATES_LIB_PROJECT_ID,
-          process.env.TEMPLATES_LIB_ACCESS_TOKEN,
-        );
+      const paths = await listLibraries();
 
-        dispatchToast(
-          <Toast>
-            <ToastTitle action={<Link>Undo</Link>}>Email sent</ToastTitle>
-            <ToastBody subtitle="Subtitle">{paths}</ToastBody>
-            <ToastFooter>
-              <Link>Action</Link>
-              <Link>Action</Link>
-            </ToastFooter>
-          </Toast>,
-          { intent: "success" },
-        );
-      }
+      dispatchToast(
+        <Toast>
+          <ToastTitle action={<Link>Undo</Link>}>Email sent</ToastTitle>
+          <ToastBody subtitle="Subtitle">{paths}</ToastBody>
+          <ToastFooter>
+            <Link>Action</Link>
+            <Link>Action</Link>
+          </ToastFooter>
+        </Toast>,
+        { intent: "success" },
+      );
+
       await context.sync();
     });
 

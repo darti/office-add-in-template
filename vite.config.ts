@@ -7,6 +7,8 @@ import { getHttpsServerOptions } from "office-addin-dev-certs";
 
 console.log(officeManifest);
 
+const proxy = { proxy: { "/templates": "http://localhost:8080" } };
+
 async function getHttpsOptions() {
   const httpsOptions = await getHttpsServerOptions();
   return { ca: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
@@ -32,5 +34,5 @@ export default defineConfig(async ({ mode }) => ({
     outDir: "../dist",
     emptyOutDir: true,
   },
-  server: mode !== "production" ? { https: await getHttpsOptions() } : {},
+  server: mode !== "production" ? { https: await getHttpsOptions(), ...proxy } : { ...proxy },
 }));

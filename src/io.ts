@@ -36,17 +36,10 @@ export async function fetchTemplate(
   return await result;
 }
 
-export async function listLibraries(base: string, projectId: string, accessToken: string): Promise<string[]> {
+export async function listLibraries(): Promise<string[]> {
   // const url = `${base}/api/v4/projects/${projectId}/repository/tree?private_token=${accessToken}`;
-  const url = `${base}/api/v4/projects/${projectId}/repository/files/Hero%20Word.docx/raw?ref=main&lfs=true&private_token=${accessToken}`;
-
-  const data = await fetch(url);
+  const data = await fetch("https://localhost:3000/templates", { mode: "cors" });
   const files = await data.json();
-
-  console.error("Narf");
-
-  return files /*.filter((f) => f.name.endsWith(".docx")).*/
-    .map((f: { path: string }) => f.path);
 
   return files;
 }
