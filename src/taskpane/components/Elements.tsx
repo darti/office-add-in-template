@@ -67,7 +67,7 @@ export default function Elements() {
         Load libraries
       </Button>
       <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={importDocument}>
-        Load libraries
+        Import doc
       </Button>
     </div>
   );

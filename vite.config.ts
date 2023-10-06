@@ -7,7 +7,7 @@ import { getHttpsServerOptions } from "office-addin-dev-certs";
 
 console.log(officeManifest);
 
-const proxy = { proxy: { "/templates": "http://localhost:8080" } };
+const proxy = { proxy: { "/templates": "http://localhost:8080", "/template": "http://localhost:8080" } };
 
 async function getHttpsOptions() {
   const httpsOptions = await getHttpsServerOptions();
