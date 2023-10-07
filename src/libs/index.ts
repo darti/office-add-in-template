@@ -2,6 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 
 export async function initLib() {
   await Word.run(async (context) => {
+    context.document.changeTrackingMode = Word.ChangeTrackingMode.trackAll;
+    await context.sync();
+
     const body = context.document.body;
     body.clear();
 

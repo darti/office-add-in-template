@@ -5,7 +5,7 @@ import { Button, Divider } from "@fluentui/react-components";
 import { loadLibs } from "../io";
 import { AddSquareRegular, ArrowClockwiseRegular, NewRegular } from "@fluentui/react-icons";
 import { useEffect, useState } from "react";
-import { Lib } from "../state";
+import { Lib, LibElement } from "../state";
 import { addElement, initLib } from "../libs";
 
 export interface AppProps {
@@ -80,6 +80,8 @@ async function initializeLibs(): Promise<Lib[]> {
       const id = contentControls.getByTag("lib_id").getFirstOrNullObject();
       const desc = contentControls.getByTag("lib_desc").getFirstOrNullObject();
 
+      title.ta;
+
       title.load("text");
       id.load("text");
       desc.load("text");
@@ -105,15 +107,23 @@ async function initializeLibs(): Promise<Lib[]> {
         e.name.load("text");
         e.id.load("text");
         e.content.load("text");
+
+        await context.sync();
       }
 
-      await context.sync();
+      const libElements: LibElement[] = [];
 
       for (const elt of elements) {
         console.log(`Element ${elt.content}`);
+
+        try {
+          libElements.push(new LibElement(elt.id.text, elt.name.text, elt.content.text));
+        } catch (e) {
+          console.warn(e);
+        }
       }
 
-      libs.push(new Lib(id.text, title.text, desc.text, l.path, doc));
+      libs.push(new Lib(id.text, title.text, desc.text, l.path, libElements, doc));
 
       console.info(`Loaded lib ${title.text} (${id.text}) with ${elts.items.length} elements}`);
     }

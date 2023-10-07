@@ -1,15 +1,41 @@
+export class LibElement {
+  private _id: string;
+  private _name: string;
+  private _content: any;
+
+  constructor(id: string, name: string, content: any) {
+    this._id = id;
+    this._name = name;
+    this._content = content;
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  get content(): any {
+    return this._content;
+  }
+}
+
 export class Lib {
   private _id: string;
   private _desc: string;
   private _path: string;
   private _name: string;
+  private _elements: LibElement[];
   private doc: Word.DocumentCreated;
 
-  constructor(id: string, name: string, desc: string, path: string, doc: Word.DocumentCreated) {
+  constructor(id: string, name: string, desc: string, path: string, elements: LibElement[], doc: Word.DocumentCreated) {
     this._id = id;
     this._desc = desc;
     this._path = path;
     this._name = name;
+    this._elements = elements;
     this.doc = doc;
   }
 
@@ -27,5 +53,9 @@ export class Lib {
 
   get name(): string {
     return this._name;
+  }
+
+  get elements(): Element[] {
+    return this._elements;
   }
 }
