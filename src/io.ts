@@ -1,5 +1,4 @@
 import { fetch } from "cross-fetch";
-import { Lib } from "./state";
 
 export async function fetchTemplate(path: string): Promise<string> {
   const data = await fetch(`https://localhost:3000/template/${path}`, { mode: "cors" });
@@ -14,29 +13,8 @@ export async function listLibraries(): Promise<string[]> {
   return files;
 }
 
-export async function loadLib(path: string): Promise<Lib> {
-  const data = await fetchTemplate(path);
-
-  return await Word.run(async (context) => {
-    const doc = context.application.createDocument(data);
-    await context.sync();
-
-    doc.contentControls.load("text");
-    doc.contentControls.load("items");
-    await context.sync();
-
-    const name = doc.contentControls.getByTag("Library Name").getFirstOrNullObject();
-    name.load("text");
-
-    name.split;
-    await context.sync();
-
-    return new Lib(name.text, path, doc);
-  });
-}
-
-export async function loadLibs(): Promise<Lib[]> {
+export async function loadLibs(): Promise<{ path: string; data: string }[]> {
   const files = await listLibraries();
 
-  return await Promise.all(files.map(loadLib));
+  return await Promise.all(files.map((p) => fetchTemplate(p).then((data) => ({ path: p, data }))));
 }

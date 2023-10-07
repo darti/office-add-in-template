@@ -63,7 +63,7 @@ export async function addElement() {
       id.styleBuiltIn = Word.BuiltInStyleName.normal;
       // id.font.highlightColor = null;
       const cc = id.insertContentControl();
-      cc.title = "Library ID";
+      cc.title = "Element ID";
       cc.tag = "elt_id";
       cc.cannotEdit = true;
     }

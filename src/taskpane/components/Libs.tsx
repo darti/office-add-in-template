@@ -1,8 +1,10 @@
-import { Button } from "@fluentui/react-components";
-import { NewRegular, AddSquareRegular } from "@fluentui/react-icons";
-import { addElement, initLib } from "../../libs";
+import { Lib } from "../../state";
 
-export default function Libs() {
+export interface LibsProps {
+  libs: Lib[];
+}
+
+export default function Libs({ libs }: LibsProps) {
   return (
     <div className="h-full w-full flex flex-col prose">
       <div className="flex-none">
@@ -10,14 +12,12 @@ export default function Libs() {
         Manage components libraries
       </div>
 
-      <div className="flex-none flex gap-x-2">
-        <Button icon={<NewRegular fontSize={16} />} onClick={initLib}>
-          New library
-        </Button>
-        <Button icon={<AddSquareRegular fontSize={16} />} onClick={addElement}>
-          Add element
-        </Button>
-      </div>
+      {libs.map((l) => (
+        <div key={l.id} className="flex-none">
+          <h3>{l.name}</h3>
+          <p>{l.desc}</p>
+        </div>
+      ))}
     </div>
   );
 }
