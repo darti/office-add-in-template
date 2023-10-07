@@ -12,18 +12,24 @@ export default function App({ isOfficeInitialized }: AppProps) {
   }
 
   return (
-    <div className="flex">
-      <div className="flex-none">
-        <h1 className="">Hero Word !</h1>
+    <div className="flex flex-col m-5">
+      <div className="flex-none prose">
+        <h1>Welcome</h1>
+        <em>Getting started</em>
+      </div>
+      <div className="flex-none my-5">
+        <Divider inset></Divider>
       </div>
 
-      <div className="flex-grow gap-y-5">
+      <div className="flex-grow">
         <Libs />
       </div>
 
-      <Divider inset></Divider>
+      <div className="flex-none my-5">
+        <Divider inset></Divider>
+      </div>
 
-      <div className="flex-grow gap-y-5">
+      <div className="flex-grow">
         <Elements />
       </div>
     </div>

@@ -24,7 +24,10 @@ export default function Elements() {
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full flex flex-col prose">
+      <h2>Elements</h2>
+      <em>Add elements</em>
+
       <Toaster toasterId={toasterId} />
       <Tree aria-label="Default">
         {libs.map((lib) => (
@@ -39,12 +42,14 @@ export default function Elements() {
         ))}
       </Tree>
 
-      <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={load}>
-        Load libraries
-      </Button>
-      <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={importDocument}>
-        Import doc
-      </Button>
+      <div className="flex-none  flex gap-x-2">
+        <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={load}>
+          Load libraries
+        </Button>
+        <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={importDocument}>
+          Import doc
+        </Button>
+      </div>
     </div>
   );
 }

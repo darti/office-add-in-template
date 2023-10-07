@@ -40,6 +40,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-typescript": "^7.23.0",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.8.0",
     "@types/office-js-preview": "^1.0.416",
     "@types/office-runtime": "^1.0.33",
