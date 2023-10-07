@@ -1,60 +1,35 @@
-import {
-  Button,
-  Link,
-  Toast,
-  ToastBody,
-  ToastFooter,
-  ToastTitle,
-  Toaster,
-  Tree,
-  TreeItem,
-  TreeItemLayout,
-  useId,
-  useToastController,
-} from "@fluentui/react-components";
+import { Button, Toaster, Tree, TreeItem, TreeItemLayout, useId } from "@fluentui/react-components";
 import { ArrowClockwiseRegular } from "@fluentui/react-icons";
 import { useState } from "react";
-import { listLibraries } from "../../io";
+import { loadLibs } from "../../io";
 import { importDocument } from "../template";
+import { Lib } from "../../state";
 
 // import { Body1, Button, Caption1, Card, CardFooter, CardHeader } from "@fluentui/react-components";
 // import { NewRegular, AddSquareRegular } from "@fluentui/react-icons";
 // import { addElement, initLib } from "../../libs";
 
 export default function Elements() {
-  const [libs] = useState([]);
+  const [libs, setLibs] = useState<Array<Lib>>([]);
   const toasterId = useId("toaster");
-  const { dispatchToast } = useToastController(toasterId);
 
-  const loadLibs = async () => {
+  const load = async () => {
     await Word.run(async (context) => {
-      const paths = await listLibraries();
+      const paths = await loadLibs();
 
-      dispatchToast(
-        <Toast>
-          <ToastTitle action={<Link>Undo</Link>}>Email sent</ToastTitle>
-          <ToastBody subtitle="Subtitle">{paths}</ToastBody>
-          <ToastFooter>
-            <Link>Action</Link>
-            <Link>Action</Link>
-          </ToastFooter>
-        </Toast>,
-        { intent: "success" },
-      );
+      setLibs(paths);
 
       await context.sync();
     });
-
-    // setLibs([paths]);
   };
 
   return (
-    <div>
+    <div className="h-full w-full">
       <Toaster toasterId={toasterId} />
       <Tree aria-label="Default">
         {libs.map((lib) => (
-          <TreeItem itemType="branch" key={lib}>
-            <TreeItemLayout>level 1, item 1</TreeItemLayout>
+          <TreeItem itemType="branch" key={lib.path}>
+            <TreeItemLayout>{lib.name}</TreeItemLayout>
             <Tree>
               <TreeItem itemType="leaf">
                 <TreeItemLayout>level 2, item 1</TreeItemLayout>
@@ -63,7 +38,8 @@ export default function Elements() {
           </TreeItem>
         ))}
       </Tree>
-      <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={loadLibs}>
+
+      <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={load}>
         Load libraries
       </Button>
       <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={importDocument}>

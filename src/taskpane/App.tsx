@@ -1,5 +1,6 @@
 import Libs from "./components/Libs";
 import Elements from "./components/Elements";
+import { Divider } from "@fluentui/react-components";
 
 export interface AppProps {
   isOfficeInitialized: boolean;
@@ -11,15 +12,20 @@ export default function App({ isOfficeInitialized }: AppProps) {
   }
 
   return (
-    <div className="ms-welcome">
-      <section className="ms-welcome__header ms-bgColor-neutralLighter ms-u-fadeIn500">
-        <h1 className="ms-fontSize-su ms-fontWeight-light ms-fontColor-neutralPrimary">Hero Word !</h1>
-      </section>
+    <div className="flex">
+      <div className="flex-none">
+        <h1 className="">Hero Word !</h1>
+      </div>
 
-      <main className="ms-welcome__main">
+      <div className="flex-grow gap-y-5">
         <Libs />
+      </div>
+
+      <Divider inset></Divider>
+
+      <div className="flex-grow gap-y-5">
         <Elements />
-      </main>
+      </div>
     </div>
   );
 }

@@ -4,7 +4,8 @@ import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
 import { createRoot } from "react-dom/client";
 
-import "./taskpane.css";
+import "tailwindcss/tailwind.css";
+import "../index.css";
 
 let isOfficeInitialized = false;
 

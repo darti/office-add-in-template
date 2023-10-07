@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import officeManifest from "vite-plugin-office-addin";
 import { resolve } from "path";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 import { getHttpsServerOptions } from "office-addin-dev-certs";
 
@@ -18,6 +19,7 @@ async function getHttpsOptions() {
 export default defineConfig(async ({ mode }) => ({
   plugins: [
     react(),
+    tsconfigPaths(),
     officeManifest.default({
       devUrl: "https://localhost:3000",
       prodUrl: "https://www.contoso.com", // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
