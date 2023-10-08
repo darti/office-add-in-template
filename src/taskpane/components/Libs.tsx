@@ -50,6 +50,15 @@ interface LibElementProps {
 function LibElement({ element }: LibElementProps) {
   const html_content = useMemo(() => ({ __html: DOMPurify.sanitize(element.html) }), [element.html]);
 
+  const insert = async () => {
+    await Word.run(async (context) => {
+      const range = context.document.getSelection();
+      // range.insertHtml(element.html, Word.InsertLocation.replace);
+      range.insertOoxml(element.ooxml, Word.InsertLocation.replace);
+      await context.sync();
+    });
+  };
+
   return (
     <Card className="flex-none" appearance="outline">
       <CardHeader
@@ -63,7 +72,9 @@ function LibElement({ element }: LibElementProps) {
         <div className="bg-neutral-50 p-5 prose" dangerouslySetInnerHTML={html_content}></div>
       </CardPreview>
       <CardFooter>
-        <Button icon={<AddRegular fontSize={16} />}>Insert</Button>
+        <Button icon={<AddRegular fontSize={16} />} onClick={insert}>
+          Insert
+        </Button>
       </CardFooter>
     </Card>
   );

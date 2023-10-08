@@ -11,9 +11,6 @@ dependencies:
   '@fluentui/react-icons':
     specifier: ^2.0.218
     version: 2.0.218(react@18.2.0)
-  '@types/uuid':
-    specifier: ^9.0.4
-    version: 9.0.4
   core-js:
     specifier: ^3.32.2
     version: 3.32.2
@@ -55,9 +52,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.8.0
     version: 20.8.0
-  '@types/office-js':
-    specifier: ^1.0.349
-    version: 1.0.349
+  '@types/office-js-preview':
+    specifier: ^1.0.422
+    version: 1.0.422
   '@types/office-runtime':
     specifier: ^1.0.33
     version: 1.0.33
@@ -67,6 +64,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.2.8
     version: 18.2.8
+  '@types/uuid':
+    specifier: ^9.0.4
+    version: 9.0.4
   '@types/webpack':
     specifier: ^5.28.3
     version: 5.28.3
@@ -3395,8 +3395,8 @@ packages:
     resolution: {integrity: sha512-LzcWltT83s1bthcvjBmiBvGJiiUe84NWRHkw+ZV6Fr41z2FbIzvc815dk2nQ3RAKMuN2fkenM/z3Xv2QzEpYxQ==}
     dev: true
 
-  /@types/office-js@1.0.349:
-    resolution: {integrity: sha512-oRV5yRtxZR1K9Q6U7lYkycusQROot9/4lmxu7uyFkT/dH8w0qxATTNIoHf/oVaFlTPFMv9Pd+TSA8gWemLGtJg==}
+  /@types/office-js-preview@1.0.422:
+    resolution: {integrity: sha512-NUfQzyvqz6xvebDrQtfdgbHUV78HP3629Ba6vgvmgVk7731Vrn8uqykD4xI8rEzBTS2NldpzM43Z9MlTs97S0A==}
     dev: true
 
   /@types/office-runtime@1.0.33:
@@ -3453,7 +3453,7 @@ packages:
 
   /@types/uuid@9.0.4:
     resolution: {integrity: sha512-zAuJWQflfx6dYJM62vna+Sn5aeSWhh3OB+wfUEACNcqUSc0AGc5JKl+ycL1vrH7frGTXhJchYjE1Hak8L819dA==}
-    dev: false
+    dev: true
 
   /@types/webpack@5.28.3:
     resolution: {integrity: sha512-Hd0GBzpP0mO2ZKChw2V7flK45m01/2g9FalpMum2X66uouzG3P1vkxvOtLVzAWLna4N9h0s2sVjND9Slnlef8A==}
