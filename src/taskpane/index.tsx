@@ -4,9 +4,8 @@ import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
 import { createRoot } from "react-dom/client";
 
-import React from "react";
-
-import "./taskpane.css";
+import "tailwindcss/tailwind.css";
+import "../index.css";
 
 let isOfficeInitialized = false;
 
@@ -15,11 +14,16 @@ Office.onReady(() => {
   isOfficeInitialized = true;
 
   const container = document.getElementById("container");
-  const root = createRoot(container);
 
-  root.render(
-    <FluentProvider theme={webLightTheme}>
-      <App isOfficeInitialized={isOfficeInitialized} />
-    </FluentProvider>,
-  );
+  if (container) {
+    const root = createRoot(container);
+
+    root.render(
+      <FluentProvider theme={webLightTheme}>
+        <App isOfficeInitialized={isOfficeInitialized} />
+      </FluentProvider>,
+    );
+  } else {
+    console.error("Could not find container element");
+  }
 });

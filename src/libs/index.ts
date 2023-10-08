@@ -2,6 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 
 export async function initLib() {
   await Word.run(async (context) => {
+    context.document.changeTrackingMode = Word.ChangeTrackingMode.trackAll;
+    await context.sync();
+
     const body = context.document.body;
     body.clear();
 
@@ -28,7 +31,7 @@ export async function initLib() {
     {
       const desc = body.insertParagraph("Description", Word.InsertLocation.end);
       desc.styleBuiltIn = Word.BuiltInStyleName.normal;
-      desc.font.highlightColor = null;
+      desc.font.highlightColor = "";
       desc.font.italic = true;
       const cc = desc.insertContentControl();
       cc.title = "Library Description";
@@ -63,7 +66,7 @@ export async function addElement() {
       id.styleBuiltIn = Word.BuiltInStyleName.normal;
       // id.font.highlightColor = null;
       const cc = id.insertContentControl();
-      cc.title = "Library ID";
+      cc.title = "Element ID";
       cc.tag = "elt_id";
       cc.cannotEdit = true;
     }

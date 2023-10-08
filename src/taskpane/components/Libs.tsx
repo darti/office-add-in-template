@@ -1,29 +1,52 @@
-import React from "react";
+import { Lib as LibModel, LibElement as LibElementModel } from "../../state";
 
-import { Body1, Button, Caption1, Card, CardFooter, CardHeader } from "@fluentui/react-components";
-import { NewRegular, AddSquareRegular } from "@fluentui/react-icons";
-import { addElement, initLib } from "../../libs";
+export interface LibsProps {
+  libs: LibModel[];
+}
 
-export default function Libs() {
+export default function Libs({ libs }: LibsProps) {
   return (
-    <Card>
-      <CardHeader
-        header={
-          <Body1>
-            <b>Libraries</b>
-          </Body1>
-        }
-        description={<Caption1>Manage components libraries</Caption1>}
-      />
+    <div className="h-full w-full flex flex-col prose">
+      <div className="flex-none">
+        <h2>Libraries</h2>
+        Manage components libraries
+      </div>
 
-      <CardFooter>
-        <Button icon={<NewRegular fontSize={16} />} onClick={initLib}>
-          New library
-        </Button>
-        <Button icon={<AddSquareRegular fontSize={16} />} onClick={addElement}>
-          Add element
-        </Button>
-      </CardFooter>
-    </Card>
+      {libs.map((l) => (
+        <Lib key={l.id} lib={l} />
+      ))}
+    </div>
+  );
+}
+
+interface LibProps {
+  lib: LibModel;
+}
+
+function Lib({ lib }: LibProps) {
+  return (
+    <div className="flex-none">
+      <h3>{lib.name}</h3>
+      <p>{lib.desc}</p>
+
+      <div>
+        {lib.elements.map((e) => (
+          <LibElement key={e.id} element={e} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+interface LibElementProps {
+  element: LibElementModel;
+}
+
+function LibElement({ element }: LibElementProps) {
+  return (
+    <div className="flex-none prose">
+      <h4>{element.name}</h4>
+      <p>{element.content.text}</p>
+    </div>
   );
 }
