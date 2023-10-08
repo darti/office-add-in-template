@@ -1,12 +1,16 @@
 export class LibElement {
   private _id: string;
   private _name: string;
-  private _content: Word.ContentControl;
+  private _content: string;
+  private _html: string;
+  private _ooxml: string;
 
-  constructor(id: string, name: string, content: Word.ContentControl) {
+  constructor(id: string, name: string, content: string, html: string, ooxml: string) {
     this._id = id;
     this._name = name;
     this._content = content;
+    this._html = html;
+    this._ooxml = ooxml;
   }
 
   get id(): string {
@@ -17,7 +21,15 @@ export class LibElement {
     return this._name;
   }
 
-  get content(): Word.ContentControl {
+  get html(): string {
+    return this._html;
+  }
+
+  get ooxml(): string {
+    return this._ooxml;
+  }
+
+  get content(): string {
     return this._content;
   }
 }
