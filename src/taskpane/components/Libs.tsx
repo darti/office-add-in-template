@@ -1,5 +1,8 @@
 import { Lib as LibModel, LibElement as LibElementModel } from "../../state";
 
+import { useMemo } from "react";
+import DOMPurify from "dompurify";
+
 export interface LibsProps {
   libs: LibModel[];
 }
@@ -43,10 +46,15 @@ interface LibElementProps {
 }
 
 function LibElement({ element }: LibElementProps) {
+  const html_content = useMemo(() => ({ __html: DOMPurify.sanitize(element.html) }), [element.html]);
+
+  console.log(JSON.stringify(html_content, null, 2));
+
   return (
     <div className="flex-none prose">
       <h4>{element.name}</h4>
-      <p>{element.content.text}</p>
+      <p>{element.content}</p>
+      <div dangerouslySetInnerHTML={html_content}></div>
     </div>
   );
 }

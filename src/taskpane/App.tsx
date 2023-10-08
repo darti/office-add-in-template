@@ -29,18 +29,6 @@ export default function App({ isOfficeInitialized }: AppProps) {
     load();
   }, []);
 
-  const ooxml = async () => {
-    Word.run(async (context) => {
-      const body = context.document.body;
-
-      // Queue a commmand to get the OOXML contents of the body.
-      const bodyOOXML = body.getOoxml();
-      context.sync();
-
-      console.log(bodyOOXML.value);
-    });
-  };
-
   return (
     <div className="flex flex-col m-5">
       <div className="flex-none prose">
@@ -55,9 +43,6 @@ export default function App({ isOfficeInitialized }: AppProps) {
         </Button>
         <Button icon={<AddSquareRegular fontSize={16} />} onClick={addElement}>
           Add element
-        </Button>
-        <Button icon={<AddSquareRegular fontSize={16} />} onClick={ooxml}>
-          Ooxml
         </Button>
       </div>
       <div className="flex-none my-5">
@@ -109,22 +94,23 @@ async function initializeLibs(): Promise<Lib[]> {
 
       for (const elt of elts.items) {
         // elt.contentControls.load("items");
+
+        const content = elt.contentControls.getByTag("elt_content").getFirstOrNullObject();
         const e = {
           name: elt.contentControls.getByTag("elt_name").getFirstOrNullObject(),
           id: elt.contentControls.getByTag("elt_id").getFirstOrNullObject(),
-          content: elt.contentControls.getByTag("elt_content").getFirstOrNullObject(),
+          content: content,
+          html: content.getHtml(),
+          ooxml: content.getOoxml(),
         };
 
         elements.push(e);
 
-        e.name.load("text");
-        e.id.load("text");
-        e.content.load("html");
-        e.content.load(["text", "type"]);
+        e.name.load();
+        e.id.load();
+        e.content.load();
 
-        context.load(e.content.paragraphs, "html");
-
-        e.content.load("richtext/id, richtext/languageid");
+        await context.sync();
       }
 
       await context.sync();
@@ -133,7 +119,9 @@ async function initializeLibs(): Promise<Lib[]> {
 
       for (const elt of elements) {
         try {
-          libElements.push(new LibElement(elt.id.text, elt.name.text, elt.content));
+          libElements.push(
+            new LibElement(elt.id.text, elt.name.text, elt.content.text, elt.html.value, elt.ooxml.value),
+          );
         } catch (e) {
           console.warn(e);
         }
