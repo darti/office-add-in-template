@@ -30,7 +30,7 @@ export default function App({ isOfficeInitialized }: AppProps) {
   }, []);
 
   return (
-    <div className="flex flex-col m-5">
+    <div className="h-full v-full prose flex flex-col m-5">
       <div className="flex-none prose">
         <h1>Welcome</h1>
         <em>Getting started</em>

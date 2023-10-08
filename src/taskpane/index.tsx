@@ -19,7 +19,7 @@ Office.onReady(() => {
     const root = createRoot(container);
 
     root.render(
-      <FluentProvider theme={webLightTheme}>
+      <FluentProvider theme={webLightTheme} className="h-full w-full">
         <App isOfficeInitialized={isOfficeInitialized} />
       </FluentProvider>,
     );

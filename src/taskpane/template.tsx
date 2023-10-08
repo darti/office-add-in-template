@@ -6,8 +6,6 @@ export async function generateTemplate() {
   await Word.run(async (context) => {
     const range = context.document.getSelection();
 
-    // context.application.toJSON();
-
     const idLabel = range.insertText("Id", Word.InsertLocation.before);
     idLabel.styleBuiltIn = Word.BuiltInStyleName.heading2;
 
