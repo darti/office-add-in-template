@@ -29,6 +29,18 @@ export default function App({ isOfficeInitialized }: AppProps) {
     load();
   }, []);
 
+  const ooxml = async () => {
+    Word.run(async (context) => {
+      const body = context.document.body;
+
+      // Queue a commmand to get the OOXML contents of the body.
+      const bodyOOXML = body.getOoxml();
+      context.sync();
+
+      console.log(bodyOOXML.value);
+    });
+  };
+
   return (
     <div className="flex flex-col m-5">
       <div className="flex-none prose">
@@ -43,6 +55,9 @@ export default function App({ isOfficeInitialized }: AppProps) {
         </Button>
         <Button icon={<AddSquareRegular fontSize={16} />} onClick={addElement}>
           Add element
+        </Button>
+        <Button icon={<AddSquareRegular fontSize={16} />} onClick={ooxml}>
+          Ooxml
         </Button>
       </div>
       <div className="flex-none my-5">
@@ -80,8 +95,6 @@ async function initializeLibs(): Promise<Lib[]> {
       const id = contentControls.getByTag("lib_id").getFirstOrNullObject();
       const desc = contentControls.getByTag("lib_desc").getFirstOrNullObject();
 
-      title.ta;
-
       title.load("text");
       id.load("text");
       desc.load("text");
@@ -106,18 +119,21 @@ async function initializeLibs(): Promise<Lib[]> {
 
         e.name.load("text");
         e.id.load("text");
-        e.content.load("text");
+        e.content.load("html");
+        e.content.load(["text", "type"]);
 
-        await context.sync();
+        context.load(e.content.paragraphs, "html");
+
+        e.content.load("richtext/id, richtext/languageid");
       }
+
+      await context.sync();
 
       const libElements: LibElement[] = [];
 
       for (const elt of elements) {
-        console.log(`Element ${elt.content}`);
-
         try {
-          libElements.push(new LibElement(elt.id.text, elt.name.text, elt.content.text));
+          libElements.push(new LibElement(elt.id.text, elt.name.text, elt.content));
         } catch (e) {
           console.warn(e);
         }

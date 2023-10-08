@@ -1,9 +1,9 @@
 export class LibElement {
   private _id: string;
   private _name: string;
-  private _content: any;
+  private _content: Word.ContentControl;
 
-  constructor(id: string, name: string, content: any) {
+  constructor(id: string, name: string, content: Word.ContentControl) {
     this._id = id;
     this._name = name;
     this._content = content;
@@ -17,7 +17,7 @@ export class LibElement {
     return this._name;
   }
 
-  get content(): any {
+  get content(): Word.ContentControl {
     return this._content;
   }
 }
@@ -55,7 +55,7 @@ export class Lib {
     return this._name;
   }
 
-  get elements(): Element[] {
+  get elements(): LibElement[] {
     return this._elements;
   }
 }

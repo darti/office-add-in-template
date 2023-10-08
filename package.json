@@ -42,7 +42,7 @@
     "@babel/preset-typescript": "^7.23.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.8.0",
-    "@types/office-js-preview": "^1.0.416",
+    "@types/office-js": "^1.0.349",
     "@types/office-runtime": "^1.0.33",
     "@types/react": "^18.2.24",
     "@types/react-dom": "^18.2.8",
