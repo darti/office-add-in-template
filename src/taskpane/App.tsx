@@ -3,7 +3,7 @@ import Libs from "./components/Libs";
 import { Button, Divider } from "@fluentui/react-components";
 
 import { loadLibs } from "../io";
-import { AddSquareRegular, ArrowClockwiseRegular, NewRegular } from "@fluentui/react-icons";
+import { AddSquareRegular, AnimalCatRegular, ArrowClockwiseRegular, NewRegular } from "@fluentui/react-icons";
 import { useEffect, useState } from "react";
 import { Lib, LibElement } from "../state";
 import { addElement, initLib } from "../libs";
@@ -31,7 +31,7 @@ export default function App({ isOfficeInitialized }: AppProps) {
 
   return (
     <div className="h-full v-full prose flex flex-col m-5">
-      <div className="flex-none prose">
+      <div className="flex-none">
         <h1>Welcome</h1>
         <em>Getting started</em>
         <Button icon={<ArrowClockwiseRegular fontSize={16} />} onClick={load}>
@@ -45,6 +45,17 @@ export default function App({ isOfficeInitialized }: AppProps) {
           Add element
         </Button>
       </div>
+
+      <div className="flex-none my-5">
+        <Divider inset></Divider>
+      </div>
+
+      <div className="flex-none">
+        <Button icon={<AnimalCatRegular fontSize={16} />} onClick={initializeLink}>
+          Init
+        </Button>
+      </div>
+
       <div className="flex-none my-5">
         <Divider inset></Divider>
       </div>
@@ -54,6 +65,32 @@ export default function App({ isOfficeInitialized }: AppProps) {
       </div>
     </div>
   );
+}
+
+async function initializeLink() {
+  await Word.run(async (context) => {
+    const range = context.document.getSelection();
+
+    const templateControl = range.insertContentControl();
+    templateControl.styleBuiltIn = Word.BuiltInStyleName.normal;
+
+    templateControl.title = "Template";
+    templateControl.tag = "TEMPLATE";
+    templateControl.appearance = Word.ContentControlAppearance.boundingBox;
+
+    await context.sync();
+
+    Office.context.document.bindings.addFromNamedItemAsync("Template", Office.BindingType.Text, async (asyncResult) => {
+      asyncResult.value.addHandlerAsync(
+        Office.EventType.BindingDataChanged,
+        async (event: Office.EventType.BindingDataChanged) => {
+          console.log("Template", event);
+        },
+      );
+    });
+
+    await context.sync();
+  });
 }
 
 async function initializeLibs(): Promise<Lib[]> {
@@ -94,6 +131,11 @@ async function initializeLibs(): Promise<Lib[]> {
 
       for (const elt of elts.items) {
         // elt.contentControls.load("items");
+
+        const changes = elt.getTrackedChanges().load();
+        await context.sync();
+
+        console.info(changes.items);
 
         const content = elt.contentControls.getByTag("elt_content").getFirstOrNullObject();
         const e = {
